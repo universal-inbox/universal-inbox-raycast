@@ -1,8 +1,8 @@
 import { Action, ActionPanel, Detail, List, getPreferenceValues, openExtensionPreferences } from "@raycast/api";
 import { GoogleMailNotificationListItem } from "./integrations/google-mail/GoogleMailNotificationListItem";
 import { GithubNotificationListItem } from "./integrations/github/listitem/GithubNotificationListItem";
+import { LinearNotificationListItem } from "./integrations/linear/listitem/LinearNotificationListItem";
 import { TodoistNotificationListItem } from "./integrations/todoist/TodoistNotificationListItem";
-import { LinearNotificationListItem } from "./integrations/linear/LinearNotificationListItem";
 import { Notification, NotificationListItemProps } from "./notification";
 import { NotificationActions } from "./action/NotificationActions";
 import { Page, UniversalInboxPreferences } from "./types";

@@ -1,5 +1,6 @@
 import { GithubDiscussion, GithubPullRequest } from "./integrations/github/types";
 import { MutatePromise } from "@raycast/utils";
+import { match, P } from "ts-pattern";
 import { Page } from "./types";
 import { Task } from "./task";
 
@@ -40,16 +41,20 @@ export type NotificationListItemProps = {
 };
 
 export function getNotificationHtmlUrl(notification: Notification) {
-  switch (notification.details?.type) {
-    case "GithubPullRequest":
-      return notification.details.content.url;
-    case "GithubDiscussion":
-      return notification.details.content.url;
-    default: {
-      // TODO
-      return "https://github.com";
-    }
-  }
+  return match(notification)
+    .with(
+      { details: { type: P.union("GithubPullRequest", "GithubDiscussion") } },
+      () => notification.details.content.url,
+    )
+    .with(
+      { metadata: { type: "Linear", content: { type: "IssueNotification", content: P.select() } } },
+      (linearIssueNotification) => linearIssueNotification.issue.url,
+    )
+    .with(
+      { metadata: { type: "Linear", content: { type: "ProjectNotification", content: P.select() } } },
+      (linearProjectNotification) => linearProjectNotification.project.url,
+    )
+    .exhaustive();
 }
 
 export function isNotificationBuiltFromTask(notification: Notification) {

@@ -87,7 +87,7 @@ function getGithubPullRequestChecksAccessory(latestCommit: GithubCommitChecks): 
     case GithubCheckStatusState.Pending:
       return { icon: Icon.Pause, tooltip: "Pending" };
     case GithubCheckStatusState.InProgress:
-      return { icon: Icon.Pause, tooltip: "In progress" }; // TODO Spinner
+      return { icon: Icon.CircleProgress, tooltip: "In progress" };
     case GithubCheckStatusState.Completed:
       switch (progress.conclusion()) {
         case GithubCheckConclusionState.Success:
