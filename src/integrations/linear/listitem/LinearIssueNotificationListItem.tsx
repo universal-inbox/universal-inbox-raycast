@@ -9,14 +9,12 @@ import { List } from "@raycast/api";
 import { match } from "ts-pattern";
 
 interface LinearIssueNotificationListItemProps {
-  icon: string;
   notification: Notification;
   linearIssueNotification: LinearIssueNotification;
   mutate: MutatePromise<Page<Notification> | undefined>;
 }
 
 export function LinearIssueNotificationListItem({
-  icon,
   notification,
   linearIssueNotification,
   mutate,
@@ -39,7 +37,7 @@ export function LinearIssueNotificationListItem({
     <List.Item
       key={notification.id}
       title={notification.title}
-      icon={icon}
+      icon={{ source: { light: "linear-logo-dark.svg", dark: "linear-logo-light.svg" } }}
       accessories={accessories}
       subtitle={subtitle}
       actions={

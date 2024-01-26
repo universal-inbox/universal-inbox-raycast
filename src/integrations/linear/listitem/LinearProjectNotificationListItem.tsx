@@ -1,30 +1,31 @@
+import { LinearProjectNotification, LinearProjectState, LinearProject } from "../types";
 import { NotificationActions } from "../../../action/NotificationActions";
 import { LinearProjectPreview } from "../preview/LinearProjectPreview";
 import { getLinearUserAccessory } from "../accessories";
 import { Notification } from "../../../notification";
-import { LinearProjectNotification } from "../types";
 import { MutatePromise } from "@raycast/utils";
+import { List, Color } from "@raycast/api";
 import { Page } from "../../../types";
-import { List } from "@raycast/api";
+import { match } from "ts-pattern";
 
 interface LinearProjectNotificationListItemProps {
-  icon: string;
   notification: Notification;
   linearProjectNotification: LinearProjectNotification;
   mutate: MutatePromise<Page<Notification> | undefined>;
 }
 
 export function LinearProjectNotificationListItem({
-  icon,
   notification,
   linearProjectNotification,
   mutate,
 }: LinearProjectNotificationListItemProps) {
   const subtitle = linearProjectNotification.project.name;
 
+  const state = getLinearProjectStateAccessory(linearProjectNotification.project);
   const lead = getLinearUserAccessory(linearProjectNotification.project.lead);
 
   const accessories: List.Item.Accessory[] = [
+    state,
     lead,
     {
       date: new Date(linearProjectNotification.updated_at),
@@ -36,7 +37,7 @@ export function LinearProjectNotificationListItem({
     <List.Item
       key={notification.id}
       title={notification.title}
-      icon={icon}
+      icon={{ source: { light: "linear-logo-dark.svg", dark: "linear-logo-light.svg" } }}
       accessories={accessories}
       subtitle={subtitle}
       actions={
@@ -50,4 +51,30 @@ export function LinearProjectNotificationListItem({
       }
     />
   );
+}
+
+export function getLinearProjectStateAccessory(project: LinearProject): List.Item.Accessory {
+  return {
+    icon: match(project)
+      .with({ state: LinearProjectState.Planned }, () => {
+        return { source: "linear-project-planned.svg", tintColor: Color.SecondaryText };
+      })
+      .with({ state: LinearProjectState.Backlog }, () => {
+        return { source: "linear-project-backlog.svg", tintColor: Color.PrimaryText };
+      })
+      .with({ state: LinearProjectState.Started }, () => {
+        return { source: "linear-project-started.svg", tintColor: Color.Blue };
+      })
+      .with({ state: LinearProjectState.Paused }, () => {
+        return { source: "linear-project-paused.svg", tintColor: Color.PrimaryText };
+      })
+      .with({ state: LinearProjectState.Completed }, () => {
+        return { source: "linear-project-completed.svg", tintColor: Color.Magenta };
+      })
+      .with({ state: LinearProjectState.Canceled }, () => {
+        return { source: "linear-project-canceled.svg", tintColor: Color.SecondaryText };
+      })
+      .exhaustive(),
+    tooltip: project.state,
+  };
 }

@@ -9,7 +9,7 @@ interface GoogleMailThreadPreviewProps {
 }
 
 export function GoogleMailThreadPreview({ notification }: GoogleMailThreadPreviewProps) {
-  const notification_html_url = useMemo(() => {
+  const notificationHtmlUrl = useMemo(() => {
     return getNotificationHtmlUrl(notification);
   }, [notification]);
 
@@ -18,7 +18,7 @@ export function GoogleMailThreadPreview({ notification }: GoogleMailThreadPrevie
       markdown={`# ${notification.title}`}
       actions={
         <ActionPanel>
-          <Action.OpenInBrowser url={notification_html_url} />
+          <Action.OpenInBrowser url={notificationHtmlUrl} />
         </ActionPanel>
       }
     />

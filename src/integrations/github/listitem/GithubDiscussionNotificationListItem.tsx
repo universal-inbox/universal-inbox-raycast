@@ -8,14 +8,12 @@ import { MutatePromise } from "@raycast/utils";
 import { Page } from "../../../types";
 
 interface GithubDiscussionNotificationListItemProps {
-  icon: string;
   notification: Notification;
   githubDiscussion: GithubDiscussion;
   mutate: MutatePromise<Page<Notification> | undefined>;
 }
 
 export function GithubDiscussionNotificationListItem({
-  icon,
   notification,
   githubDiscussion,
   mutate,
@@ -45,7 +43,7 @@ export function GithubDiscussionNotificationListItem({
     <List.Item
       key={notification.id}
       title={notification.title}
-      icon={icon}
+      icon={{ source: { light: "github-logo-dark.svg", dark: "github-logo-light.svg" } }}
       subtitle={subtitle}
       accessories={accessories}
       actions={

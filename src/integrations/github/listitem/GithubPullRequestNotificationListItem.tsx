@@ -16,14 +16,12 @@ import { MutatePromise } from "@raycast/utils";
 import { Page } from "../../../types";
 
 interface GithubPullRequestNotificationListItemProps {
-  icon: string;
   notification: Notification;
   githubPullRequest: GithubPullRequest;
   mutate: MutatePromise<Page<Notification> | undefined>;
 }
 
 export function GithubPullRequestNotificationListItem({
-  icon,
   notification,
   githubPullRequest,
   mutate,
@@ -64,7 +62,7 @@ export function GithubPullRequestNotificationListItem({
     <List.Item
       key={notification.id}
       title={notification.title}
-      icon={icon}
+      icon={{ source: { light: "github-logo-dark.svg", dark: "github-logo-light.svg" } }}
       accessories={accessories}
       subtitle={subtitle}
       actions={

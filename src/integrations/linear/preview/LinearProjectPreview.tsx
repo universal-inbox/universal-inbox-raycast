@@ -9,7 +9,7 @@ interface LinearProjectPreviewProps {
 }
 
 export function LinearProjectPreview({ notification, linearProject }: LinearProjectPreviewProps) {
-  const notification_html_url = useMemo(() => {
+  const notificationHtmlUrl = useMemo(() => {
     return getNotificationHtmlUrl(notification);
   }, [notification]);
 
@@ -18,7 +18,7 @@ export function LinearProjectPreview({ notification, linearProject }: LinearProj
       markdown={`# ${linearProject.name}`}
       actions={
         <ActionPanel>
-          <Action.OpenInBrowser url={notification_html_url} />
+          <Action.OpenInBrowser url={notificationHtmlUrl} />
         </ActionPanel>
       }
     />

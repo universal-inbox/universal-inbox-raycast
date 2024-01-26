@@ -3,15 +3,15 @@ import { Action, ActionPanel, Icon, getPreferenceValues, showToast, Toast } from
 import { CreateTaskFromNotification } from "./CreateTaskFromNotification";
 import { LinkNotificationToTask } from "./LinkNotificationToTask";
 import { Page, UniversalInboxPreferences } from "../types";
+import { default as dayjs, extend } from "dayjs";
 import { MutatePromise } from "@raycast/utils";
 import { useMemo, ReactElement } from "react";
 import { handleErrors } from "../api";
 import { TaskStatus } from "../task";
 import utc from "dayjs/plugin/utc";
 import fetch from "node-fetch";
-import dayjs from "dayjs";
 
-dayjs.extend(utc);
+extend(utc);
 
 interface NotificationActionsProps {
   notification: Notification;
@@ -20,14 +20,13 @@ interface NotificationActionsProps {
 }
 
 export function NotificationActions({ notification, detailsTarget, mutate }: NotificationActionsProps) {
-  const notification_html_url = useMemo(() => {
+  const notificationHtmlUrl = useMemo(() => {
     return getNotificationHtmlUrl(notification);
   }, [notification]);
 
-  console.log("notification_html_url", notification_html_url, notification);
   return (
     <ActionPanel>
-      <Action.OpenInBrowser url={notification_html_url} />
+      <Action.OpenInBrowser url={notificationHtmlUrl} />
       <Action.Push title="Show Details" target={detailsTarget} />
       <Action
         title="Delete Notification"

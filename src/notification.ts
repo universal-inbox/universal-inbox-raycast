@@ -64,7 +64,7 @@ export function getNotificationHtmlUrl(notification: Notification) {
       (googleMailThread) =>
         `https://mail.google.com/mail/u/${googleMailThread.user_email_address}/#inbox/${googleMailThread.id}`,
     )
-    .with({ metadata: { type: "Todoist", content: P.select() } }, () => "")
+    .with({ metadata: { type: "Todoist" } }, () => `https://todoist.com/showTask?id=${notification.source_id}`)
     .with({ metadata: { type: "Github" } }, () => "https://github.com")
     .exhaustive();
 }

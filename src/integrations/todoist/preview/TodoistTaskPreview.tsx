@@ -1,21 +1,19 @@
 import { Notification, getNotificationHtmlUrl } from "../../../notification";
 import { Detail, ActionPanel, Action } from "@raycast/api";
-import { GithubPullRequest } from "../types";
 import { useMemo } from "react";
 
-interface GithubPullRequestPreviewProps {
+interface TodoistTaskPreviewProps {
   notification: Notification;
-  githubPullRequest: GithubPullRequest;
 }
 
-export function GithubPullRequestPreview({ notification, githubPullRequest }: GithubPullRequestPreviewProps) {
+export function TodoistTaskPreview({ notification }: TodoistTaskPreviewProps) {
   const notificationHtmlUrl = useMemo(() => {
     return getNotificationHtmlUrl(notification);
   }, [notification]);
 
   return (
     <Detail
-      markdown={`# ${githubPullRequest.title}`}
+      markdown={`# ${notification.title}`}
       actions={
         <ActionPanel>
           <Action.OpenInBrowser url={notificationHtmlUrl} />

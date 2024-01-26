@@ -8,18 +8,12 @@ import { GoogleMailThread } from "../types";
 import { Page } from "../../../types";
 
 interface GoogleMailThreadListItemProps {
-  icon: string;
   notification: Notification;
   googleMailThread: GoogleMailThread;
   mutate: MutatePromise<Page<Notification> | undefined>;
 }
 
-export function GoogleMailThreadListItem({
-  icon,
-  notification,
-  googleMailThread,
-  mutate,
-}: GoogleMailThreadListItemProps) {
+export function GoogleMailThreadListItem({ notification, googleMailThread, mutate }: GoogleMailThreadListItemProps) {
   const isStarred = googleMailThread.messages.some((message) => message.labelIds?.includes("STARRED"));
   const isImportant = googleMailThread.messages.some((message) => message.labelIds?.includes("IMPORTANT"));
   const fromAddress = googleMailThread.messages[0].payload.headers.find((header) => header.name === "From")?.value;
@@ -50,7 +44,7 @@ export function GoogleMailThreadListItem({
     <List.Item
       key={notification.id}
       title={notification.title}
-      icon={icon}
+      icon={{ source: { light: "google-mail-logo-dark.svg", dark: "google-mail-logo-light.svg" } }}
       accessories={accessories}
       subtitle={subtitle}
       actions={

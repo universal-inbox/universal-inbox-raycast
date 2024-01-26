@@ -1,15 +1,15 @@
 import { Action, useNavigation, ActionPanel, Form, Icon, getPreferenceValues, showToast, Toast } from "@raycast/api";
 import { MutatePromise, useForm, FormValidation, useFetch } from "@raycast/utils";
 import { Page, UniversalInboxPreferences } from "../types";
+import { default as dayjs, extend } from "dayjs";
 import { Notification } from "../notification";
 import { TaskPriority } from "../task";
 import { handleErrors } from "../api";
 import utc from "dayjs/plugin/utc";
 import { useState } from "react";
 import fetch from "node-fetch";
-import dayjs from "dayjs";
 
-dayjs.extend(utc);
+extend(utc);
 
 interface CreateTaskFromNotificationProps {
   notification: Notification;
