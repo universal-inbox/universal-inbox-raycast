@@ -43,7 +43,7 @@ export function LinearProjectNotificationListItem({
         <NotificationActions
           notification={notification}
           detailsTarget={
-            <LinearProjectPreview notification={notification} linearProject={linearProjectNotification.issue} />
+            <LinearProjectPreview notification={notification} linearProject={linearProjectNotification.project} />
           }
           mutate={mutate}
         />

@@ -1,3 +1,7 @@
+export type LinearNotification =
+  | { type: "IssueNotification"; content: LinearIssueNotification }
+  | { type: "ProjectNotification"; content: LinearProjectNotification };
+
 export interface LinearIssueNotification {
   id: string;
   type: string;

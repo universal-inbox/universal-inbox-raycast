@@ -29,7 +29,7 @@ export function LinearNotificationListItem({ notification, mutate }: Notificatio
         <LinearProjectNotificationListItem
           icon={icon}
           notification={notification}
-          LinearProjectNotification={notification.metadata.content.content}
+          linearProjectNotification={notification.metadata.content.content}
           mutate={mutate}
         />
       );

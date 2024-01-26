@@ -1,11 +1,12 @@
+import { LinearWorkflowStateType, LinearIssueNotification, LinearWorkflowState } from "../types";
 import { NotificationActions } from "../../../action/NotificationActions";
 import { LinearIssuePreview } from "../preview/LinearIssuePreview";
 import { getLinearUserAccessory } from "../accessories";
 import { Notification } from "../../../notification";
-import { LinearIssueNotification } from "../types";
 import { MutatePromise } from "@raycast/utils";
 import { Page } from "../../../types";
 import { List } from "@raycast/api";
+import { match } from "ts-pattern";
 
 interface LinearIssueNotificationListItemProps {
   icon: string;
@@ -53,36 +54,18 @@ export function LinearIssueNotificationListItem({
 }
 
 export function getLinearIssueStateAccessory(state: LinearWorkflowState): List.Item.Accessory {
-  switch (state.type) {
-    case "Triage":
-      return {
-        icon: { source: "linear-issue-triage.svg", tintColor: state.color },
-        tooltip: state.name,
-      };
-    case "Backlog":
-      return {
-        icon: { source: "linear-issue-backlog.svg", tintColor: state.color },
-        tooltip: state.name,
-      };
-    case "Unstarted":
-      return {
-        icon: { source: "linear-issue-unstarted.svg", tintColor: state.color },
-        tooltip: state.name,
-      };
-    case "Started":
-      return {
-        icon: { source: "linear-issue-started.svg", tintColor: state.color },
-        tooltip: state.name,
-      };
-    case "Completed":
-      return {
-        icon: { source: "linear-issue-completed.svg", tintColor: state.color },
-        tooltip: state.name,
-      };
-    case "Canceled":
-      return {
-        icon: { source: "linear-issue-canceled.svg", tintColor: state.color },
-        tooltip: state.name,
-      };
-  }
+  return {
+    icon: {
+      source: match(state)
+        .with({ type: LinearWorkflowStateType.Triage }, () => "linear-issue-triage.svg")
+        .with({ type: LinearWorkflowStateType.Backlog }, () => "linear-issue-backlog.svg")
+        .with({ type: LinearWorkflowStateType.Unstarted }, () => "linear-issue-unstarted.svg")
+        .with({ type: LinearWorkflowStateType.Started }, () => "linear-issue-started.svg")
+        .with({ type: LinearWorkflowStateType.Completed }, () => "linear-issue-completed.svg")
+        .with({ type: LinearWorkflowStateType.Canceled }, () => "linear-issue-canceled.svg")
+        .exhaustive(),
+      tintColor: state.color,
+    },
+    tooltip: state.name,
+  };
 }

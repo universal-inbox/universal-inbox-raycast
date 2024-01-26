@@ -24,6 +24,7 @@ export function NotificationActions({ notification, detailsTarget, mutate }: Not
     return getNotificationHtmlUrl(notification);
   }, [notification]);
 
+  console.log("notification_html_url", notification_html_url, notification);
   return (
     <ActionPanel>
       <Action.OpenInBrowser url={notification_html_url} />
