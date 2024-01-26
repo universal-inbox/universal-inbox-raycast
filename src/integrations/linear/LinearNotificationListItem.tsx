@@ -1,9 +1,9 @@
+import { NotificationActions } from "../../action/NotificationActions";
+import { NotificationListItemProps } from "../../notification";
 import { Detail, List, environment } from "@raycast/api";
 import { useMemo } from "react";
-import { NotificationActions } from "../../NotificationActions";
-import { NotificationListItemProps } from "../../types";
 
-export function LinearNotificationListItem({ notification }: NotificationListItemProps) {
+export function LinearNotificationListItem({ notification, mutate }: NotificationListItemProps) {
   const icon = useMemo(() => {
     if (environment.appearance === "dark") {
       return "linear-logo-light.svg";
@@ -18,7 +18,11 @@ export function LinearNotificationListItem({ notification }: NotificationListIte
       icon={icon}
       subtitle={`#${notification.source_id}`}
       actions={
-        <NotificationActions notification={notification} detailsTarget={<Detail markdown="# To be implemented 👋" />} />
+        <NotificationActions
+          notification={notification}
+          detailsTarget={<Detail markdown="# To be implemented 👋" />}
+          mutate={mutate}
+        />
       }
     />
   );

@@ -1,7 +1,3 @@
-import { Color, Icon, List } from "@raycast/api";
-import { NotificationActions } from "../../../NotificationActions";
-import { Notification } from "../../../types";
-import { GithubPullRequestPreview } from "../preview/GithubPullRequestPreview";
 import {
   GithubPullRequestState,
   GithubPullRequestReviewDecision,
@@ -11,18 +7,26 @@ import {
   GithubCheckStatusState,
   GithubCheckSuite,
 } from "../types";
-import { getGithubActorAccessory } from "../misc";
+import { GithubPullRequestPreview } from "../preview/GithubPullRequestPreview";
+import { NotificationActions } from "../../../action/NotificationActions";
+import { getGithubActorAccessory } from "../accessories";
+import { Notification } from "../../../notification";
+import { Color, Icon, List } from "@raycast/api";
+import { MutatePromise } from "@raycast/utils";
+import { Page } from "../../../types";
 
 interface GithubPullRequestNotificationListItemProps {
   icon: string;
   notification: Notification;
   githubPullRequest: GithubPullRequest;
+  mutate: MutatePromise<Page<Notification> | undefined>;
 }
 
 export function GithubPullRequestNotificationListItem({
   icon,
   notification,
   githubPullRequest,
+  mutate,
 }: GithubPullRequestNotificationListItemProps) {
   const subtitle = `${githubPullRequest.head_repository?.name_with_owner} #${githubPullRequest.number}`;
 
@@ -67,6 +71,7 @@ export function GithubPullRequestNotificationListItem({
         <NotificationActions
           notification={notification}
           detailsTarget={<GithubPullRequestPreview notification={notification} githubPullRequest={githubPullRequest} />}
+          mutate={mutate}
         />
       }
     />

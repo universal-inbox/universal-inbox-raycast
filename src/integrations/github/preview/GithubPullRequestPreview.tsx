@@ -1,8 +1,7 @@
+import { Notification, getNotificationHtmlUrl } from "../../../notification";
 import { Detail, ActionPanel, Action } from "@raycast/api";
-import { Notification } from "../../../types";
 import { GithubPullRequest } from "../types";
 import { useMemo } from "react";
-import { getNotificationHtmlUrl } from "../../../notification";
 
 interface GithubPullRequestPreviewProps {
   notification: Notification;

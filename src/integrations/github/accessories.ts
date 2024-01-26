@@ -1,5 +1,5 @@
-import { Icon, Image, List } from "@raycast/api";
 import { GithubActor, getGithubActorName } from "./types";
+import { Icon, Image, List } from "@raycast/api";
 
 export function getGithubActorAccessory(actor?: GithubActor): List.Item.Accessory {
   if (actor) {

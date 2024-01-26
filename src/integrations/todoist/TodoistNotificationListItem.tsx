@@ -1,9 +1,9 @@
+import { NotificationTaskActions } from "../../action/NotificationTaskActions";
+import { NotificationListItemProps } from "../../notification";
 import { Detail, List, environment } from "@raycast/api";
 import { useMemo } from "react";
-import { NotificationTaskActions } from "../../NotificationTaskActions";
-import { NotificationListItemProps } from "../../types";
 
-export function TodoistNotificationListItem({ notification }: NotificationListItemProps) {
+export function TodoistNotificationListItem({ notification, mutate }: NotificationListItemProps) {
   const icon = useMemo(() => {
     if (environment.appearance === "dark") {
       return "todoist-icon-light.svg";
@@ -21,6 +21,7 @@ export function TodoistNotificationListItem({ notification }: NotificationListIt
         <NotificationTaskActions
           notification={notification}
           detailsTarget={<Detail markdown="# To be implemented 👋" />}
+          mutate={mutate}
         />
       }
     />

@@ -1,7 +1,8 @@
+import { Notification, getNotificationHtmlUrl } from "../notification";
 import { Action, ActionPanel, Icon } from "@raycast/api";
+import { MutatePromise } from "@raycast/utils";
 import { useMemo, ReactElement } from "react";
-import { getNotificationHtmlUrl } from "./notification";
-import { Notification } from "./types";
+import { Page } from "../types";
 
 function deleteNotification(notification: Notification) {
   console.log(`Deleting notification ${notification.id}`);
@@ -19,21 +20,20 @@ function completeTask(notification: Notification) {
   console.log(`Completing task ${notification.id}`);
 }
 
-export function NotificationTaskActions({
-  notification,
-  detailsTarget,
-}: {
+interface NotificationTaskActionsProps {
   notification: Notification;
   detailsTarget: ReactElement;
-}) {
+  mutate: MutatePromise<Page<Notification> | undefined>;
+}
+export function NotificationTaskActions({ notification, detailsTarget }: NotificationTaskActionsProps) {
   const notification_html_url = useMemo(() => {
     return getNotificationHtmlUrl(notification);
   }, [notification]);
 
   return (
     <ActionPanel>
-      <Action.Push title="Show Details" target={detailsTarget} />
       <Action.OpenInBrowser url={notification_html_url} />
+      <Action.Push title="Show Details" target={detailsTarget} />
       <Action
         title="Delete Notification"
         icon={Icon.Trash}

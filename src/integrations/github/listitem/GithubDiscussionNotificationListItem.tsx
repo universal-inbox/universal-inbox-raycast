@@ -1,20 +1,24 @@
-import { Color, Icon, List } from "@raycast/api";
-import { NotificationActions } from "../../../NotificationActions";
-import { Notification } from "../../../types";
-import { getGithubActorAccessory } from "../misc";
-import { GithubDiscussion, GithubDiscussionStateReason } from "../types";
 import { GithubDiscussionPreview } from "../preview/GithubDiscussionPreview";
+import { NotificationActions } from "../../../action/NotificationActions";
+import { GithubDiscussion, GithubDiscussionStateReason } from "../types";
+import { getGithubActorAccessory } from "../accessories";
+import { Notification } from "../../../notification";
+import { Color, Icon, List } from "@raycast/api";
+import { MutatePromise } from "@raycast/utils";
+import { Page } from "../../../types";
 
 interface GithubDiscussionNotificationListItemProps {
   icon: string;
   notification: Notification;
   githubDiscussion: GithubDiscussion;
+  mutate: MutatePromise<Page<Notification> | undefined>;
 }
 
 export function GithubDiscussionNotificationListItem({
   icon,
   notification,
   githubDiscussion,
+  mutate,
 }: GithubDiscussionNotificationListItemProps) {
   const subtitle = `${githubDiscussion.repository.name_with_owner}`;
 
@@ -48,6 +52,7 @@ export function GithubDiscussionNotificationListItem({
         <NotificationActions
           notification={notification}
           detailsTarget={<GithubDiscussionPreview notification={notification} githubDiscussion={githubDiscussion} />}
+          mutate={mutate}
         />
       }
     />

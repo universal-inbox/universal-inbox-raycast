@@ -5,6 +5,10 @@ default:
 build:
     npm run build
 
+# Format code
+format:
+    npm run format
+
 # Lint extension code
 lint:
     npm run lint
