@@ -47,13 +47,13 @@ export function NotificationActions({ notification, detailsTarget, mutate }: Not
         onAction={() => snoozeNotification(notification, mutate)}
       />
       <Action.Push
-        title="Create Task"
+        title="Create Task..."
         icon={Icon.Calendar}
-        shortcut={{ modifiers: ["ctrl"], key: "p" }}
+        shortcut={{ modifiers: ["ctrl"], key: "t" }}
         target={<CreateTaskFromNotification notification={notification} mutate={mutate} />}
       />
       <Action.Push
-        title="Link to Task"
+        title="Link to Task..."
         icon={Icon.Link}
         shortcut={{ modifiers: ["ctrl"], key: "l" }}
         target={<LinkNotificationToTask notification={notification} mutate={mutate} />}
