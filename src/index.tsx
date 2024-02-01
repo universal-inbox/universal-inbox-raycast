@@ -7,6 +7,7 @@ import { Notification, NotificationListItemProps } from "./notification";
 import { NotificationActions } from "./action/NotificationActions";
 import { Page, UniversalInboxPreferences } from "./types";
 import { useFetch } from "@raycast/utils";
+import { useState } from "react";
 
 export default function Command() {
   const preferences = getPreferenceValues<UniversalInboxPreferences>();
@@ -29,8 +30,11 @@ export default function Command() {
     );
   }
 
+  const [notificationKind, setNotificationKind] = useState("");
   const { isLoading, data, mutate } = useFetch<Page<Notification>>(
-    `${preferences.universalInboxBaseUrl}/api/notifications?status=Unread,Read&with_tasks=true`,
+    `${preferences.universalInboxBaseUrl}/api/notifications?status=Unread,Read&with_tasks=true${
+      notificationKind ? "&notification_kind=" + notificationKind : ""
+    }`,
     {
       headers: {
         Authorization: `Bearer ${preferences.apiKey}`,
@@ -39,10 +43,24 @@ export default function Command() {
   );
 
   return (
-    <List isLoading={isLoading}>
-      {data?.content.map((notification: Notification) => {
-        return <NotificationListItem key={notification.id} notification={notification} mutate={mutate} />;
-      })}
+    <List
+      isLoading={isLoading}
+      searchBarPlaceholder="Filter notifications..."
+      searchBarAccessory={
+        <NotificationKindDropdown value={notificationKind} onNotificationKindChange={setNotificationKind} />
+      }
+    >
+      {data?.content.length === 0 ? (
+        <List.EmptyView
+          icon={{ source: "ui-logo-transparent.png" }}
+          title="Congrats! You have reach zero inbox 🎉"
+          description="You don't have any new notifications."
+        />
+      ) : (
+        data?.content.map((notification: Notification) => {
+          return <NotificationListItem key={notification.id} notification={notification} mutate={mutate} />;
+        })
+      )}
     </List>
   );
 }
@@ -76,5 +94,24 @@ function DefaultNotificationListItem({ notification, mutate }: NotificationListI
         />
       }
     />
+  );
+}
+
+interface NotificationKindDropdownProps {
+  value: string;
+  onNotificationKindChange: (newValue: string) => void;
+}
+
+function NotificationKindDropdown({ value, onNotificationKindChange }: NotificationKindDropdownProps) {
+  return (
+    <List.Dropdown tooltip="Select Notification Kind" value={value} onChange={onNotificationKindChange}>
+      <List.Dropdown.Section title="Notification kind">
+        <List.Dropdown.Item key="0" title="" value="" />
+        <List.Dropdown.Item key="Github" title="Github" value="Github" />
+        <List.Dropdown.Item key="Linear" title="Linear" value="Linear" />
+        <List.Dropdown.Item key="GoogleMail" title="Google Mail" value="GoogleMail" />
+        <List.Dropdown.Item key="Todoist" title="Todoist" value="Todoist" />
+      </List.Dropdown.Section>
+    </List.Dropdown>
   );
 }

@@ -6,7 +6,8 @@
   "icon": "ui-logo-transparent.png",
   "author": "dax42",
   "owner": "universal-inbox",
-  "version": "0.1.0",
+  "access": "public",
+  "version": "0.1.1",
   "categories": [
     "Productivity"
   ],

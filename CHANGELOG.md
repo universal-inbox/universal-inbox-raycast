@@ -2,6 +2,12 @@
 
 ## [Unreleased]
 
+## [0.1.1] - 2024-02-31
+
+### Added
+
+- Add filter per notification kind
+
 ## [0.1.0] - 2024-01-29
 
 ### Added
