@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Added
+
+- Display Linear notification reason
+
 ## [0.1.2] - 2024-02-01
 
 ### Added
