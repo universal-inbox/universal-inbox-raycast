@@ -19,7 +19,10 @@ export function LinearIssueNotificationListItem({
   linearIssueNotification,
   mutate,
 }: LinearIssueNotificationListItemProps) {
-  const subtitle = `${linearIssueNotification.issue.team.name} #${linearIssueNotification.issue.identifier}`;
+  const projectSubtitle = linearIssueNotification.issue.project
+    ? `/ ${linearIssueNotification.issue.project.name} `
+    : "";
+  const subtitle = `${linearIssueNotification.issue.team.name} ${projectSubtitle}#${linearIssueNotification.issue.identifier}`;
 
   const state = getLinearIssueStateAccessory(linearIssueNotification.issue.state);
   const assignee = getLinearUserAccessory(linearIssueNotification.issue.assignee);

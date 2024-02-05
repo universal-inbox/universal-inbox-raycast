@@ -5,6 +5,7 @@
 ### Added
 
 - Display Linear notification reason
+- Display Linear project on notification item
 
 ## [0.1.2] - 2024-02-01
 
