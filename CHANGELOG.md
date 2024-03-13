@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.1.4] - 2024-03-13
+
 ### Added
 
 - Add Linear Project and Team icons
