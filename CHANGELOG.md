@@ -6,6 +6,7 @@
 
 - Add Linear Project and Team icons
 - Add Slack notifications (ie. save for later) support
+- Set `Inbox` project as default when creating or planning a task
 
 ## [0.1.3] - 2024-02-05
 
