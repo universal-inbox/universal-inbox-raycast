@@ -27,7 +27,7 @@ export function SlackNotificationListItem({ notification, mutate }: Notification
     <List.Item
       key={notification.id}
       title={notification.title}
-      icon={{ source: { light: "github-logo-dark.svg", dark: "github-logo-light.svg" } }}
+      icon={{ source: { light: "slack-logo-dark.svg", dark: "slack-logo-light.svg" } }}
       subtitle={subtitle}
       accessories={accessories}
       actions={
