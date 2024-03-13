@@ -5,6 +5,7 @@
 ### Added
 
 - Add Linear Project and Team icons
+- Add Slack notifications (ie. save for later) support
 
 ## [0.1.3] - 2024-02-05
 
