@@ -68,7 +68,7 @@ async function completeTask(notification: Notification, mutate: MutatePromise<Pa
   try {
     await mutate(
       handleErrors(
-        fetch(`${preferences.universalInboxBaseUrl}/api/tasks/${notification.task.id}`, {
+        fetch(`${preferences.universalInboxBaseUrl.replace(/\/$/, "")}/api/tasks/${notification.task.id}`, {
           method: "PATCH",
           body: JSON.stringify({ status: TaskStatus.Done }),
           headers: {

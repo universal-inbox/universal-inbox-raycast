@@ -33,7 +33,7 @@ export default function Command() {
 
   const [notificationKind, setNotificationKind] = useState("");
   const { isLoading, data, mutate } = useFetch<Page<Notification>>(
-    `${preferences.universalInboxBaseUrl}/api/notifications?status=Unread,Read&with_tasks=true${
+    `${preferences.universalInboxBaseUrl.replace(/\/$/, "")}/api/notifications?status=Unread,Read&with_tasks=true${
       notificationKind ? "&notification_kind=" + notificationKind : ""
     }`,
     {
