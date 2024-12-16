@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.2.0] - 2024-12-16
+
 ### Added
 
 - Add support for Slack reaction notifications
