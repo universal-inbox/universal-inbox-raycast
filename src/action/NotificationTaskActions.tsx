@@ -3,7 +3,7 @@ import { Notification, getNotificationHtmlUrl, isNotificationBuiltFromTask } fro
 import { Action, ActionPanel, Icon, Toast, getPreferenceValues, showToast } from "@raycast/api";
 import { Page, UniversalInboxPreferences } from "../types";
 import { MutatePromise } from "@raycast/utils";
-import { useMemo, ReactElement } from "react";
+import { useMemo, ReactNode } from "react";
 import { PlanTask } from "./PlanTask";
 import { handleErrors } from "../api";
 import { TaskStatus } from "../task";
@@ -11,7 +11,7 @@ import fetch from "node-fetch";
 
 interface NotificationTaskActionsProps {
   notification: Notification;
-  detailsTarget: ReactElement;
+  detailsTarget: ReactNode;
   mutate: MutatePromise<Page<Notification> | undefined>;
 }
 

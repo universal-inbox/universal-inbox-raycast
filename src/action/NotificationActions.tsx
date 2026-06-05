@@ -5,7 +5,7 @@ import { LinkNotificationToTask } from "./LinkNotificationToTask";
 import { Page, UniversalInboxPreferences } from "../types";
 import { default as dayjs, extend } from "dayjs";
 import { MutatePromise } from "@raycast/utils";
-import { useMemo, ReactElement } from "react";
+import { useMemo, ReactNode } from "react";
 import { handleErrors } from "../api";
 import { TaskStatus } from "../task";
 import utc from "dayjs/plugin/utc";
@@ -15,7 +15,7 @@ extend(utc);
 
 interface NotificationActionsProps {
   notification: Notification;
-  detailsTarget: ReactElement;
+  detailsTarget: ReactNode;
   mutate: MutatePromise<Page<Notification> | undefined>;
 }
 
