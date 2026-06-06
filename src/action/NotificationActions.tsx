@@ -26,8 +26,8 @@ export function NotificationActions({ notification, detailsTarget, mutate }: Not
 
   return (
     <ActionPanel>
-      <Action.OpenInBrowser url={notificationHtmlUrl} />
       <Action.Push title="Show Details" icon={Icon.AppWindowSidebarRight} target={detailsTarget} />
+      <Action.OpenInBrowser url={notificationHtmlUrl} shortcut={{ modifiers: ["cmd"], key: "enter" }} />
       <Action
         title="Delete Notification"
         icon={Icon.Trash}
