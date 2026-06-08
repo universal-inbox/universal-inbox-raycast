@@ -2,6 +2,8 @@
 
 ## [Unreleased]
 
+## [0.3.0] - 2026-06-08
+
 ### Added
 
 - Add support for TickTick, Google Calendar, Google Drive and API (web page) notifications
